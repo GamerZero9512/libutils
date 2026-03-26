@@ -54,7 +54,7 @@ void vpanic(const char* fmt, va_list args) {
 }
 
 void enable_wincon_ansi(void) {
-#ifdef IS_WINDOWS
+#if IS_WINDOWS
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     HANDLE hErr = GetStdHandle(STD_ERROR_HANDLE);
     if(hOut != INVALID_HANDLE_VALUE) {

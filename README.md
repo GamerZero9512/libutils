@@ -1,23 +1,96 @@
 # libutils
+![build: passing](https://img.shields.io/badge/build-passing-green)
+![last updated badge](https://img.shields.io/badge/last_updated-26/03/2026-blue)
 
 A simple, yet powerful general utility library for C.
 
 ------
-### Current features:
+### Overview of current features:
 - `tostring()` utilities to format values into a heap-allocated char buffer
 - `lenasstr()` utilities to get the length of a formatted string without actually creating it
 - OS detector macros to add per-OS compile-time functionality
+  Compile-time error on unknown platform by default, can be silenced by defining `UTILS_ALLOW_UNKNOWN_PLATFORM`
 - `panic()` utilities to quickly and safely print an error and exit the program
 - `fastwrite()` wrapper around `write()` to print text without `stdio.h` buffering
 - `enable_wincon_ansi()` utility to enable ANSI escape codes on Windows Console
 - `min()`, `max()` and `clamp()` macros supporting both `int` and `double` data types
 - Comprehensive list of CSI ANSI escape sequences, as well as some utilities to use them in a more user-friendly way
+- libutils versioning macros via `UTILS_VERSION`, `UTILS_VERSION_MAJOR`, `UTILS_VERSION_MINOR` and `UTILS_VERSION_PATCH`
+
+------
+# Full features list
+
+-----
+### libutils versioning macros
+
+libutils defines constants to check for specific versions of the library.
+
+|Macro name|Example|
+|----------|-------|
+|UTILS_VERSION|"1.1.0"|
+|UTILS_VERSION_MAJOR|1|
+|UTILS_VERSION_MINOR|1|
+|UTILS_VERSION_PATCH|0|
+
+------
+### OS detector
+
+The libutils OS detector defines `IS_WINDOWS`, `IS_LINUX`, `IS_MACOS` and `IS_UNKNOWN` if `UTILS_ALLOW_UNKNOWN_PLATFORM` is defined. If it isn't, libutils will throw a compile-time error if the OS can't be recognised using `_WIN32`, `_WIN64`, `__linux__`, `__APPLE__` or `__MACH__`.
+
+The OS as a human-readable string is stored in `OS`, or as a number in `OS_TYPE`.
+
+|OS number|OS|
+|---------|--|
+|0|Unknown|
+|1|Windows|
+|2|Linux|
+|3|macOS|
+
+Numerical constants `OS_UNKNOWN`, `OS_WINDOWS`, `OS_LINUX` and `OS_MACOS` are defined as 0, 1, 2 and 3 respectively to reduce 'magic numbers'.
+
+------
+### Other utilities
+
+|Function signature|Description|
+|------------------|-----------|
+|char* tostring(const char* fmt, ...)|Format values into a heap-allocated string|
+|char* vtostring(const char* fmt, va_list args)|Format values provided via `args` into a heap-allocated string|
+|int lenasstr(const char* fmt, ...)|Return what the length of the output string *would* be, without actually formatting it|
+|int vlenasstr(const char* fmt, va_list args|Return what the length of the output string *would* be, without actually formatting it, receiving parameters through `args`|
+|void panic(const char* fmt, ...)|Quickly and safely exit the program with a message|
+|void vpanic(const char* fmt, va_list args)|Quickly and safely exit the program with a message and variable arguments supplied via `args`|
+|char* timestr(time_t* t)|Returns UNIX timestamp formatted as a human-readable date and time|
+|min(a, b)|Macro to get the min of two ints or doubles|
+|max(a, b)|Macro to get the max of two ints or doubles|
+|clamp(val, min, mx)|Macro to clamp a value between two ints or doubles|
+|int imin(int a, int b)|Returns the lowest of two integers|
+|double dmin(double a, double b)|Returns the lowest of two doubles|
+|int imax(int a, int b)|Returns the highest of two integers|
+|double dmax(double a, double b)|Returns the highest of two doubles|
+|int iclamp(int val, int min, int max)|Clamp an integer value between two integers|
+|double dclamp(double val, double min, double max)|Clamp a double value between two doubles|
+|void enable_wincon_ansi(void)|Enables ANSI escape codes on Windows Console|
+|arrlen(arr)|Returns length of array `arr`|
+|void fastwrite(int stream, const char* string)|Wrapper around `write()` to quickly write a string to the screen without buffering|
+|sz_fastwrite(stream, string)|Macro to provide similar functionality to `fastwrite()` using `sizeof()`  rather than `strlen()`
+
+------
+
+### Variables
+
+|Variable type|Variable name|Description|
+|-------------|-------------|-----------|
+|bool|WINCON_ANSI_ENABLED|true/false depending on whether `enable_wincon_ansi()` has been called|
 
 ------
  ### Supported ANSI codes
+
  > [!NOTE]
  > All macros which take input return the result in the form of a heap-allocated string, so it must be freed manually.
  
+ > [!NOTE]
+ > To enable ANSI escape codes on Windows, call the `enable_wincon_ansi()` function.
+
 |Macro name|Description|
 |----------|-----------|
 |ANSI_CUR_HOME|Moves the text cursor to the top left of the screen.|
