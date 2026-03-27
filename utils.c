@@ -38,19 +38,19 @@ char* tostring(const char* fmt, ...) {
     return result;
 }
 
+void vpanic(const char* fmt, va_list args) {
+    if(!WINCON_ANSI_ENABLED) enable_wincon_ansi();
+    fprintf(stderr, "%spanic:%s ", ANSI_FG_BRIGHT_RED, ANSI_RESET);
+    vfprintf(stderr, fmt, args);
+    fputc('\n', stderr);
+    exit(EXIT_FAILURE);
+}
+
 void panic(const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
     vpanic(fmt, args);
     va_end(args);
-}
-
-void vpanic(const char* fmt, va_list args) {
-    if(!WINCON_ANSI_ENABLED) enable_wincon_ansi();
-    fprintf(stderr, "%spanic:\x1b[0m ", ANSI_FG_BRIGHT_RED);
-    vfprintf(stderr, fmt, args);
-    fputc('\n', stderr);
-    exit(EXIT_FAILURE);
 }
 
 void enable_wincon_ansi(void) {

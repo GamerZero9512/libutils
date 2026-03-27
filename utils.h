@@ -182,8 +182,8 @@ static inline double dclamp(double val, double min, double max) {
     if(val < min) return min;
     return val;
 }
-void panic(const char* fmt, ...);
 void vpanic(const char* fmt, va_list args);
+void panic(const char* fmt, ...);
 static inline void fastwrite(int stream, const char* string) {
     write(stream, string, strlen(string));
 }
