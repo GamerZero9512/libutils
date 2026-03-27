@@ -2,6 +2,7 @@
 ![build: passing](https://img.shields.io/badge/build-passing-green)
 ![last updated](https://img.shields.io/github/last-commit/gamerzero9512/libutils?color=blue)
 [![latest release](https://img.shields.io/github/v/release/gamerzero9512/libutils?label=latest%20release)](https://github.com/GamerZero9512/libutils/releases)
+[![MIT license](https://img.shields.io/badge/license-MIT-yellow)](https://raw.githubusercontent.com/GamerZero9512/libutils/refs/heads/main/LICENSE)
 
 A simple, yet powerful general utility library for C.
 
