@@ -57,7 +57,7 @@ Numerical constants `OS_UNKNOWN`, `OS_WINDOWS`, `OS_LINUX` and `OS_MACOS` are de
 |char* tostring(const char* fmt, ...)|Format values into a heap-allocated string|
 |char* vtostring(const char* fmt, va_list args)|Format values provided via `args` into a heap-allocated string|
 |int lenasstr(const char* fmt, ...)|Return what the length of the output string *would* be, without actually formatting it|
-|int vlenasstr(const char* fmt, va_list args|Return what the length of the output string *would* be, without actually formatting it, receiving parameters through `args`|
+|int vlenasstr(const char* fmt, va_list args)|Return what the length of the output string *would* be, without actually formatting it, receiving parameters through `args`|
 |void panic(const char* fmt, ...)|Quickly and safely exit the program with a message|
 |void vpanic(const char* fmt, va_list args)|Quickly and safely exit the program with a message and variable arguments supplied via `args`|
 |char* timestr(time_t* t)|Returns UNIX timestamp formatted as a human-readable date and time|
